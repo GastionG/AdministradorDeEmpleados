@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    margin: auto;
+}
+th{
+    width: 20%;
+}
+mat-card{
+    margin: 50px auto;
+    width: 90%;
+}
+mat-card-title{
+    margin-bottom: 15px;
+}

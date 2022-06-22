@@ -1,0 +1,17 @@
+.form{
+    margin: auto;
+    display: flex;
+}
+mat-form-field{
+    margin-right: 5px;
+    width: 20%;
+    flex-grow: 1;
+
+}
+mat-card{
+    margin: 50px auto;
+    width: 90%;
+}
+mat-card-title{
+    margin-bottom: 15px;
+}

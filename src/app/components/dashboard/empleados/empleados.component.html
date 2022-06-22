@@ -1,0 +1,91 @@
+<app-add-empleado></app-add-empleado>
+<mat-card class="mat-elevation-z5">
+  <mat-card-title>Lista de empleados</mat-card-title>
+  <mat-form-field appearance="standard">
+    <mat-label>Filtrar datos</mat-label>
+    <input matInput (keyup)="aplicarFiltro($event)" #input>
+  </mat-form-field>
+  <form [formGroup]="form" (ngSubmit)="enviarEdicion()" class="mat-elevation-z5">
+    <table mat-table [dataSource]="dataArray" >
+          <ng-container matColumnDef="a" >
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="empleadoBanderaId != element._id; else no">{{element.name}}</span>
+              <ng-template #no>
+                <mat-form-field>
+                  <mat-label>{{element.name}}</mat-label>
+                  <input matInput formControlName="name" type="text">
+                </mat-form-field>
+              </ng-template>
+            </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="b">
+            <th mat-header-cell *matHeaderCellDef> Posicion </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="empleadoBanderaId != element._id; else no">{{element.position}}</span>
+              <ng-template #no>
+                <mat-form-field>
+                  <mat-label>{{element.position}}</mat-label>
+                  <input matInput formControlName="position" type="text">
+                </mat-form-field>
+              </ng-template>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="c">
+            <th mat-header-cell *matHeaderCellDef> Oficina </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="empleadoBanderaId != element._id; else no">{{element.office}}</span>
+              <ng-template #no>
+                <mat-form-field>
+                  <mat-label>{{element.office}}</mat-label>
+                  <input matInput formControlName="office" type="text">
+                </mat-form-field>
+              </ng-template>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="d">
+            <th mat-header-cell *matHeaderCellDef> Salario </th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="empleadoBanderaId != element._id; else no">{{element.salary}}</span>
+              <ng-template #no>
+                <mat-form-field>
+                  <mat-label>{{element.salary}}</mat-label>
+                  <input matInput formControlName="salary" type="number">
+                </mat-form-field>
+              </ng-template>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="e">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element">
+              <div *ngIf="!editando; else no">
+                <button type="button" mat-icon-button color="primary" (click)="editarEmpleado(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button type="button" mat-icon-button color="warn" (click)="eliminarEmpleado(element._id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <ng-template #no>
+                <button mat-icon-button color="primary" type="submit" [disabled]="form.invalid">
+                  <mat-icon>done</mat-icon>
+                </button>
+                <button type="button" mat-icon-button color="warn" (click)="cancelarEditarEmpleado()">
+                  <mat-icon>close</mat-icon>
+                </button>
+                
+              </ng-template>
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </form>
+  
+</mat-card>
